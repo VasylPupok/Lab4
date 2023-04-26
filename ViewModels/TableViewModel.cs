@@ -16,15 +16,15 @@ namespace Lab4.ViewModels
     {
         private TableView _viewDataGrid;
         private readonly DAO _dao;
-        
 
-        public TableViewModel(TableView viewItemContainer)
+
+        internal TableViewModel(TableView viewItemContainer)
         {   
             _viewDataGrid = viewItemContainer;
             _dao = new DAO();
         }
 
-        public void addAllPeople()
+        internal void addAllPeople()
         {
             _viewDataGrid.UserGrid.Items.Clear();
             foreach (var p in _dao.getPeople().OrderBy(p => p.First))
@@ -33,16 +33,31 @@ namespace Lab4.ViewModels
             }
         }
 
-        public void removeSelected()
+        internal void removeSelected()
         {
             ulong id = (_viewDataGrid.UserGrid.SelectedItem as Pair<ulong, Person>).First;
             _dao.deletePerson(id);
             _viewDataGrid.UserGrid.Items.Remove(_viewDataGrid.UserGrid.SelectedItem);
         }
 
-        public void addPerson()
+        internal void addPerson()
         {
-            _viewDataGrid.NavigationService.Navigate(new EditUserPage(new AddViewModel(_dao), _viewDataGrid));
+            _viewDataGrid.NavigationService.Navigate(EditUserPage.AddUserView(new AddViewModel(_dao), _viewDataGrid));
+        }
+
+        internal void editPerson()
+        {
+            var selected = _viewDataGrid.UserGrid.SelectedItem as Pair<ulong, Person>;
+            if(selected != null)
+            {
+                _viewDataGrid.NavigationService.Navigate(
+                    EditUserPage.EditUserView(
+                        new EditViewModel(_dao, selected.First), 
+                        _viewDataGrid,
+                        selected.Second
+                        ));
+            }
+            
         }
 
     }

@@ -18,14 +18,30 @@ namespace Lab4.Views
         private IUserInputModel _userInputModel;
         private TableView _table;
 
-        internal EditUserPage(IUserInputModel userInputModel, TableView table)
+        private EditUserPage(IUserInputModel userInputModel, TableView table)
         {
             InitializeComponent();
             _userInputModel = userInputModel;
             _table = table;
         }
 
-        public void submitButtonClicked(object sender, EventArgs e)
+        internal static EditUserPage AddUserView(AddViewModel userInputModel, TableView table)
+        {
+            return new EditUserPage(userInputModel, table);
+        }
+
+        internal static EditUserPage EditUserView(EditViewModel userInputModel, TableView table, Person userToBeEdited)
+        {
+            EditUserPage page = new EditUserPage(userInputModel, table);
+            page.nameInput.Text = userToBeEdited.Name;
+            page.surnameInput.Text = userToBeEdited.Surname;
+            page.emailInput.Text = userToBeEdited.Email;
+            page.dateInput.SelectedDate = userToBeEdited.Birthday;
+            return page;
+        }
+
+
+        private void submitButtonClicked(object sender, EventArgs e)
         {
             lock (this)
             {
@@ -36,13 +52,14 @@ namespace Lab4.Views
                 string surname = this.surnameInput.Text;
                 string email = this.emailInput.Text;
                 DateTime? birthday = this.dateInput.SelectedDate;
+                Person p = new Person(name, surname, email, birthday.Value);
 
                 Thread worker = new Thread(
                 async () =>
                 {
                     if (await Task.Run(() => allInputsValid(name, surname, email, birthday)))
                     {
-                        Person p = new Person(name, surname, email, birthday.Value);
+                        //Person p = new Person(name, surname, email, birthday.Value);
                         this._userInputModel.submit(p);
                         this.Dispatcher.Invoke(() => {
                             _table.refresh();

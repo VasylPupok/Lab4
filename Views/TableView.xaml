@@ -41,7 +41,7 @@
         
         <Button Content="Add new person" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" Width="Auto" Command="{Binding GotoLoginCommand}" Name="AddPersonButton" Click="AddPersonButton_Click"/>
         <Button Content="Remove selected" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" Width="Auto" Command="{Binding RemovePersonCommand}" Name="RemovePersonButton" IsEnabled="False" Click="RemovePersonButton_Click"/>
-        <Button Content="Edit selected" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" Width="Auto" Command="{Binding ChangeSelectedCommand}" Name="EditPersonButton" IsEnabled="False"/>
+        <Button Content="Edit selected" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" Width="Auto" Command="{Binding ChangeSelectedCommand}" Name="EditPersonButton" IsEnabled="False" ButtonBase.Click="EditPersonButton_Click"/>
         
         <Button Content="Filters" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" Width="Auto" Command="{Binding FilterPeopleCommand}" Name="FiltersButton" Click="FiltersButton_Click"/>
         <Button Content="Set default" Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" Width="Auto" Command="{Binding CancelFilterCommand}" Name="RemoveFiltersButton" ButtonBase.Click="RemoveFiltersButton_Click"/>

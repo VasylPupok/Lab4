@@ -50,5 +50,10 @@ namespace Lab4.Views
         {
             _tableViewModel.addPerson();
         }
+
+        private void EditPersonButton_Click(object sender, object e)
+        {
+            _tableViewModel.editPerson();
+        }
     }
 }

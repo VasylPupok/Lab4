@@ -3,7 +3,7 @@ using Lab4.Models;
 
 namespace Lab4.ViewModels
 {
-    internal class EditViewModel
+    internal class EditViewModel : IUserInputModel
     {
         private DAO _dao;
         private ulong _currId;
@@ -11,9 +11,10 @@ namespace Lab4.ViewModels
         internal EditViewModel(DAO dao, ulong id)
         {
             _dao = dao;
+            _currId = id;
         }
 
-        internal void submit(Person person)
+        public void submit(Person person)
         {
             _dao.updatePerson(_currId, person);
         }
