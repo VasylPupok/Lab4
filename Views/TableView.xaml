@@ -1,0 +1,50 @@
+﻿<Page x:Class="Lab4.Views.TableView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Background="White"
+        Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="1" Grid.Column="0" MaxHeight="340" Grid.ColumnSpan="8" 
+                  ItemsSource="{Binding GridPeople, Mode=OneWay}" 
+                  AutoGenerateColumns="False" IsReadOnly="True" 
+                  SelectedItem="{Binding SelectedPerson}" Name="UserGrid" 
+                  SelectionChanged="SelectedPerson">
+            <DataGrid.Columns>
+                <DataGridTextColumn MinWidth="100" Header="Person id" Binding="{Binding First}"></DataGridTextColumn>
+                <DataGridTextColumn MinWidth="100" Header="First Name" Binding="{Binding Second.Name}"></DataGridTextColumn>
+                <DataGridTextColumn MinWidth="100" Header="LastName" Binding="{Binding Second.Surname}"></DataGridTextColumn>
+                <DataGridTextColumn MinWidth="100" Header="Birthday" Binding="{Binding Second.Birthday}"></DataGridTextColumn>
+                <DataGridTextColumn MinWidth="100" Header="Email" Binding="{Binding Second.Email}"></DataGridTextColumn>
+                <DataGridTextColumn MinWidth="100" Header="IsAdult" Binding="{Binding Second.IsAdult}"></DataGridTextColumn>
+                <DataGridTextColumn MinWidth="100" Header="Sun Sign" Binding="{Binding Second.Zodiac}"></DataGridTextColumn>
+                <DataGridTextColumn MinWidth="100" Header="Chinese Sign" Binding="{Binding Second.ChineseZodiac}"></DataGridTextColumn>
+                <DataGridTextColumn MinWidth="100" Header="IsBirthday" Binding="{Binding Second.IsBirthday}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <Button Content="Add new person" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" Width="Auto" Command="{Binding GotoLoginCommand}" Name="AddPersonButton" Click="AddPersonButton_Click"/>
+        <Button Content="Remove selected" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" Width="Auto" Command="{Binding RemovePersonCommand}" Name="RemovePersonButton" IsEnabled="False" Click="RemovePersonButton_Click"/>
+        <Button Content="Edit selected" Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" Width="Auto" Command="{Binding ChangeSelectedCommand}" Name="EditPersonButton" IsEnabled="False"/>
+        
+        <Button Content="Filters" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" Width="Auto" Command="{Binding FilterPeopleCommand}" Name="FiltersButton" Click="FiltersButton_Click"/>
+        <Button Content="Set default" Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="1" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" Width="Auto" Command="{Binding CancelFilterCommand}" Name="RemoveFiltersButton" ButtonBase.Click="RemoveFiltersButton_Click"/>
+        
+    </Grid>
+</Page>
